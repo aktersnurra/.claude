@@ -1,0 +1,56 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline"
+  },
+  "syntaxHighlightingDisabled": false,
+  "theme": "dark-ansi",
+  "editorMode": "vim",
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "model": "claude-sonnet-4-6",
+  "cleanupPeriodDays": 365,
+  "alwaysThinkingEnabled": false,
+  "permissions": {
+    "deny": [
+      "Bash(rm -rf*)",
+      "Bash(git push origin main*)",
+      "Bash(git push origin master*)",
+      "Read(**/.env*)"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"session_end\": true}' >> ~/.claude/session.log"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"$(date): wrote $CLAUDE_FILE_PATHS\" >> .claude/writes.log"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'Context compacting — writing session state...' && cat .claude/writes.log >> SESSION_SUMMARY.md"
+          }
+        ]
+      }
+    ]
+  }
+}
