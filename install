@@ -2,15 +2,18 @@
 
 DOTFILES="$HOME/projects/.claude"
 CLAUDE="$HOME/.claude"
+OPENCODE="$HOME/.config/opencode"
 
 mkdir -p "$CLAUDE/commands"
 mkdir -p "$CLAUDE/skills"
+mkdir -p "$OPENCODE/commands"
 
 ln -sf "$DOTFILES/CLAUDE.md" "$CLAUDE/CLAUDE.md"
 ln -sf "$DOTFILES/settings.json" "$CLAUDE/settings.json"
 
 for cmd in "$DOTFILES/commands/"*.md; do
   ln -sf "$cmd" "$CLAUDE/commands/$(basename "$cmd")"
+  ln -sf "$cmd" "$OPENCODE/commands/$(basename "$cmd")"
 done
 
 for skill in "$DOTFILES/skills/"/*/; do
