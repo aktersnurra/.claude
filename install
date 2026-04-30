@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
+
 DOTFILES="$HOME/projects/.claude"
 CLAUDE="$HOME/.claude"
 
 mkdir -p "$CLAUDE/commands"
+mkdir -p "$CLAUDE/skills"
+
 ln -sf "$DOTFILES/CLAUDE.md" "$CLAUDE/CLAUDE.md"
 ln -sf "$DOTFILES/settings.json" "$CLAUDE/settings.json"
 
 for cmd in "$DOTFILES/commands/"*.md; do
   ln -sf "$cmd" "$CLAUDE/commands/$(basename "$cmd")"
+done
+
+for skill in "$DOTFILES/skills/"/*/; do
+  ln -sf "$skill" "$CLAUDE/skills/$(basename "$skill")"
 done
 
 echo "Claude dotfiles linked."
