@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES="$HOME/projects/.claude"
+DOTFILES="$HOME/projects/dotagent"
 CLAUDE="$HOME/.claude"
 OPENCODE="$HOME/.config/opencode"
 
