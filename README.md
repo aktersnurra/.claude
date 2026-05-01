@@ -1,11 +1,12 @@
-# .claude
+# .agent
 
-Personal Claude Code configuration — global settings, slash commands, and skills symlinked into `~/.claude`.
+Personal Coding Harness configuration (Claude Code, Opencode) — 
+global settings, slash commands, and skills symlinked into `~/.claude`, `~/.config/opencode`.
 
 ## Structure
 
 ```
-.claude/
+dotagent/
 ├── CLAUDE.md          # Global workflow and code discipline instructions
 ├── settings.json      # Claude Code settings (model, hooks, permissions, theme)
 ├── install            # Symlink script
