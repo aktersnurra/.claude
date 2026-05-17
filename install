@@ -1,21 +1,10 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 DOTFILES="$HOME/projects/dotagent"
-CLAUDE="$HOME/.claude"
-OPENCODE="$HOME/.config/opencode"
 
-mkdir -p "$CLAUDE/skills"
-mkdir -p "$OPENCODE/commands"
+"$DOTFILES/install-claude"
+"$DOTFILES/install-opencode"
+"$DOTFILES/install-pi"
 
-ln -sf "$DOTFILES/CLAUDE.md" "$CLAUDE/CLAUDE.md"
-ln -sf "$DOTFILES/settings.json" "$CLAUDE/settings.json"
-
-for skill in "$DOTFILES/skills/"/*/; do
-  ln -sf "$skill" "$CLAUDE/skills/$(basename "$skill")"
-done
-
-echo "Installing Claude plugins..."
-claude plugins install superpowers@claude-plugins-official --scope user
-claude plugins install frontend-design@claude-plugins-official --scope user
-
-echo "Claude dotfiles linked."
+echo "All harnesses configured."

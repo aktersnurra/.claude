@@ -1,15 +1,18 @@
 # .agent
 
-Personal Coding Harness configuration (Claude Code, Opencode) — 
-global settings and skills symlinked into `~/.claude`, `~/.config/opencode`.
+Personal Coding Harness configuration (Claude Code, Opencode, Pi) —
+global settings and skills symlinked into each harness's config directory.
 
 ## Structure
 
 ```
 dotagent/
-├── CLAUDE.md          # Global workflow and code discipline instructions
+├── CLAUDE.md          # Global workflow and code discipline instructions (used by all harnesses)
 ├── settings.json      # Claude Code settings (model, hooks, permissions, theme)
-├── install            # Symlink script + plugin installer
+├── install            # Install all harnesses
+├── install-claude     # Claude Code: symlinks + plugin install
+├── install-opencode   # Opencode: symlinks
+├── install-pi         # Pi: symlinks
 └── skills/
     ├── jj/            # Jujutsu VCS idioms and workflows
     ├── ocaml/         # OCaml idioms, Eio, dune, testing conventions
@@ -20,12 +23,21 @@ dotagent/
 ## Install
 
 ```sh
-./install
+./install            # all harnesses
+./install-claude     # Claude Code only
+./install-opencode   # Opencode only
+./install-pi         # Pi only
 ```
 
-Symlinks `CLAUDE.md`, `settings.json`, and all skills into `~/.claude`, then installs Claude plugins.
+## Harness config locations
 
-## Plugins
+| Harness | Context file | Skills | Settings |
+|---|---|---|---|
+| Claude Code | `~/.claude/CLAUDE.md` | `~/.claude/skills/` | `~/.claude/settings.json` |
+| Opencode | `~/.config/opencode/CLAUDE.md` | `~/.config/opencode/skills/` | — |
+| Pi | `~/.pi/agent/AGENTS.md` | `~/.pi/agent/skills/` | `~/.pi/agent/settings.json` |
+
+## Plugins (Claude Code)
 
 | Plugin | Purpose |
 |---|---|

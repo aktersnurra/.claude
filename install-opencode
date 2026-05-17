@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES="$HOME/projects/dotagent"
+OPENCODE="$HOME/.config/opencode"
+
+mkdir -p "$OPENCODE/skills"
+
+ln -sf "$DOTFILES/CLAUDE.md" "$OPENCODE/CLAUDE.md"
+
+for skill in "$DOTFILES/skills/"/*/; do
+  ln -sf "$skill" "$OPENCODE/skills/$(basename "$skill")"
+done
+
+echo "Opencode configured."

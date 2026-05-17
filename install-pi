@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES="$HOME/projects/dotagent"
+PI="$HOME/.pi/agent"
+
+mkdir -p "$PI/skills"
+
+ln -sf "$DOTFILES/CLAUDE.md" "$PI/AGENTS.md"
+
+for skill in "$DOTFILES/skills/"/*/; do
+  ln -sf "$skill" "$PI/skills/$(basename "$skill")"
+done
+
+echo "Pi configured."
