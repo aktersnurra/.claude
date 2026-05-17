@@ -1,7 +1,7 @@
 # .agent
 
 Personal Coding Harness configuration (Claude Code, Opencode) — 
-global settings, slash commands, and skills symlinked into `~/.claude`, `~/.config/opencode`.
+global settings and skills symlinked into `~/.claude`, `~/.config/opencode`.
 
 ## Structure
 
@@ -9,11 +9,7 @@ global settings, slash commands, and skills symlinked into `~/.claude`, `~/.conf
 dotagent/
 ├── CLAUDE.md          # Global workflow and code discipline instructions
 ├── settings.json      # Claude Code settings (model, hooks, permissions, theme)
-├── install            # Symlink script
-├── commands/
-│   ├── checkpoint.md  # /checkpoint — summarise session and prompt /compact
-│   ├── plan.md        # /plan — generate module-by-module implementation plan
-│   └── spec.md        # /spec — iterate on requirements and write SPEC.md
+├── install            # Symlink script + plugin installer
 └── skills/
     ├── jj/            # Jujutsu VCS idioms and workflows
     ├── ocaml/         # OCaml idioms, Eio, dune, testing conventions
@@ -27,7 +23,14 @@ dotagent/
 ./install
 ```
 
-Symlinks `CLAUDE.md`, `settings.json`, all commands, and all skills into `~/.claude`.
+Symlinks `CLAUDE.md`, `settings.json`, and all skills into `~/.claude`, then installs Claude plugins.
+
+## Plugins
+
+| Plugin | Purpose |
+|---|---|
+| `superpowers` | Workflow skills: spec, plan, checkpoint, TDD, debugging, brainstorming, etc. |
+| `frontend-design` | Production-grade UI component generation |
 
 ## Skills
 
@@ -37,11 +40,3 @@ Symlinks `CLAUDE.md`, `settings.json`, all commands, and all skills into `~/.cla
 | `ocaml` | OCaml code, Eio, Lwt, GADTs, dune |
 | `tiger-style` | Naming functions, types, designing APIs |
 | `type-driven` | Modelling errors, designing interfaces, ADTs, ROP |
-
-## Commands
-
-| Command | Purpose |
-|---|---|
-| `/spec` | Iterate on requirements → write `SPEC.md` |
-| `/plan` | Generate module plan → write `PLAN.md` |
-| `/checkpoint` | Summarise session → append to `SESSION_SUMMARY.md` |
