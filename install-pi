@@ -22,6 +22,8 @@ PI_PACKAGES=(
   "npm:@juicesharp/rpiv-btw"
   "npm:@juicesharp/rpiv-pi"
   "npm:@samfp/pi-memory"
+  "npm:pi-vim"
+  "npm:@casualjim/pi-superpowers"
 )
 
 SETTINGS="$PI/settings.json"
