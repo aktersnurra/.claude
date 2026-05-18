@@ -35,7 +35,7 @@ esac
 title="$(basename -- "$html_path")"
 title="${title%.html}"
 
-pandoc --standalone --css "$css_path" --metadata "title=$title" -o "$html_path" "$md_path"
+pandoc --standalone --section-divs --css "$css_path" --metadata "title=$title" -o "$html_path" "$md_path"
 
 if command -v xdg-open >/dev/null 2>&1; then
 	xdg-open "$html_path" >/dev/null 2>&1 &
