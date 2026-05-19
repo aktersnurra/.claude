@@ -32,7 +32,14 @@ docs/explain/<YYYY-MM-DD>-<topic>.md
 docs/explain/<YYYY-MM-DD>-<topic>.html
 ```
 
-The Markdown file is authoritative. The HTML file is derived from it.
+If the user explicitly asks for slides, a presentation, a deck, or something to present, also write a separate condensed slide source and render it:
+
+```text
+docs/explain/<YYYY-MM-DD>-<topic>-slides.md
+docs/explain/<YYYY-MM-DD>-<topic>-slides.html
+```
+
+The reading Markdown file is authoritative for detail. The slides Markdown file is a distilled companion, not the same document rendered differently. HTML files are derived from their matching Markdown sources.
 
 ## Workflow
 
@@ -46,15 +53,24 @@ The Markdown file is authoritative. The HTML file is derived from it.
 6. Check `command -v pandoc`.
 7. If Pandoc is missing, ask whether to install it before running any install command.
 8. If the user declines installation or Pandoc cannot be installed, stop after Markdown and report that HTML was not generated.
-9. Render and open the page with:
+9. Render and open the reading page with:
 
 ```bash
 skills/explain/scripts/render.sh docs/explain/<YYYY-MM-DD>-<topic>.md
 ```
 
-10. Reply only with:
+10. If the user explicitly requested slides, write a condensed slide source to `docs/explain/<YYYY-MM-DD>-<topic>-slides.md`.
+11. Render and open the slide deck with:
+
+```bash
+skills/explain/scripts/render-slides.sh docs/explain/<YYYY-MM-DD>-<topic>-slides.md
+```
+
+12. Reply only with:
     - Markdown path
     - HTML path, if generated
+    - Slides Markdown path, if generated
+    - Slides HTML path, if generated
     - Whether the browser was opened
 
 ## Pandoc Installation
@@ -86,13 +102,28 @@ The Markdown answer should be useful as a standalone document:
 - Prefer concrete project evidence over generic advice.
 - State assumptions and limitations when relevant.
 
+## Slide Quality
+
+Only create slides when explicitly requested. Slides are a presentation companion, not a replacement for the reading document.
+
+- Write a separate `*-slides.md` source.
+- Separate slides with `---`.
+- Put one idea on each slide.
+- Use 3-5 bullets per slide at most.
+- Keep code snippets short enough to present.
+- Convert dense tables into bullets.
+- Prefer takeaways, sequence, and narrative over exhaustive detail.
+- Keep full detail in the normal Markdown document.
+
 ## Common Mistakes
 
-| Mistake                          | Correct behavior                                            |
-| -------------------------------- | ----------------------------------------------------------- |
-| Answering fully in chat          | Write the full answer to Markdown and keep chat short       |
-| Writing into the dotagent repo   | Write into the current project where the question was asked |
-| Rendering before Markdown exists | Write Markdown first, then render HTML                      |
-| Installing Pandoc automatically  | Ask for approval before installing                          |
-| Skipping browser open            | Use the render helper, which opens the HTML page            |
-| Using one-off CSS                | Use `skills/explain/assets/style.css` through the helper    |
+| Mistake                             | Correct behavior                                            |
+| ----------------------------------- | ----------------------------------------------------------- |
+| Answering fully in chat             | Write the full answer to Markdown and keep chat short       |
+| Writing into the dotagent repo      | Write into the current project where the question was asked |
+| Rendering before Markdown exists    | Write Markdown first, then render HTML                      |
+| Installing Pandoc automatically     | Ask for approval before installing                          |
+| Skipping browser open               | Use the render helper, which opens the HTML page            |
+| Generating slides by default        | Generate slides only when explicitly requested              |
+| Rendering the reading doc as slides | Write a separate condensed `*-slides.md` source first       |
+| Using one-off CSS                   | Use the skill CSS assets through the render helpers         |
